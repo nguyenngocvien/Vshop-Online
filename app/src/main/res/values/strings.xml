@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">VShop</string>
+    <string name="title_activity_thongtin">Map</string>
+    <string name="title_home">Trang chủ</string>
+    <string name="title_smartphone">Điện thoại</string>
+    <string name="title_laptop">Laptop</string>
+    <string name="title_information">Thông tin</string>
+    <string name="address">Địa chỉ: 227 Nguyễn Văn Cừ Quận 5 Tp.HCM</string>
+    <string name="internet_connection">No Internet Connection !</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

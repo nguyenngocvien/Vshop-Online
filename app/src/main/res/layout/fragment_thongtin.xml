@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@drawable/background_blue_corner"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:src="@drawable/ic_call_black_24dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_margin="5dp"
+                android:textSize="16sp"
+                android:textColor="#080808"
+                android:text="Cửa hàng điện thoại, laptop VShop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_margin="5dp"
+                android:textSize="18sp"
+                android:textColor="#080808"
+                android:text="036.445.1710"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/background_blue_corner"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:src="@drawable/ic_location_on_black_24dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+            <TextView
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:textSize="16sp"
+                android:textColor="#080808"
+                android:text="@string/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+    </LinearLayout>
+        <fragment
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mMap"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context = ".activity.MainActivity">
+        </fragment>
+</LinearLayout>
