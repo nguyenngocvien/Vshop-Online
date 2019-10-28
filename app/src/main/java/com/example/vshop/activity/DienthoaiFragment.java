@@ -108,54 +108,58 @@ public class DienthoaiFragment extends Fragment {
     }
 
     private void GetData(int Page) {
-        final RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String duongdan = Server.duongDanDienthoai+String.valueOf(Page);
-        StringRequest stringRequest =  new StringRequest(Request.Method.POST, duongdan, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                int id=0;
-                String Tendt="";
-                int Giadt=0;
-                String Hinhanhdt="";
-                String Mota="";
-                int Idspdt=0;
-                if (response != null && response.length() != 2){
-                    listviewdt.removeFooterView(footerview);
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        for (int i=0; i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            id = jsonObject.getInt("id");
-                            Tendt = jsonObject.getString("tensp");
-                            Giadt = jsonObject.getInt("giasp");
-                            Hinhanhdt = jsonObject.getString("hinhanhsp");
-                            Mota = jsonObject.getString("motasp");
-                            Idspdt = jsonObject.getInt("idsanpham");
-                            mangdt.add(new Sanpham(id,Tendt,Giadt,Hinhanhdt,Mota,Idspdt));
-                            dienthoaiAdapter.notifyDataSetChanged();
+        try {
+            final RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+            String duongdan = Server.duongDanDienthoai+String.valueOf(Page);
+            StringRequest stringRequest =  new StringRequest(Request.Method.POST, duongdan, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    int id=0;
+                    String Tendt="";
+                    int Giadt=0;
+                    String Hinhanhdt="";
+                    String Mota="";
+                    int Idspdt=0;
+                    if (response != null && response.length() != 2){
+                        listviewdt.removeFooterView(footerview);
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i=0; i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                id = jsonObject.getInt("id");
+                                Tendt = jsonObject.getString("tensp");
+                                Giadt = jsonObject.getInt("giasp");
+                                Hinhanhdt = jsonObject.getString("hinhanhsp");
+                                Mota = jsonObject.getString("motasp");
+                                Idspdt = jsonObject.getInt("idsanpham");
+                                mangdt.add(new Sanpham(id,Tendt,Giadt,Hinhanhdt,Mota,Idspdt));
+                                dienthoaiAdapter.notifyDataSetChanged();
+                            }
+                        } catch (JSONException e){
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e){
-                        e.printStackTrace();
+                    }else{
+                        limitdata = true;
+                        listviewdt.removeFooterView(footerview);
+                        //CheckConnection.showToast_Short(getContext(),"Đã hết dữ liệu");
                     }
-                }else{
-                    limitdata = true;
-                    listviewdt.removeFooterView(footerview);
-                    //CheckConnection.showToast_Short(getContext(),"Đã hết dữ liệu");
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams() throws AuthFailureError {
-                HashMap<String,String> param = new HashMap<String, String>();
-                param.put("idsanpham",String.valueOf(1)); // id của điện thoại là 1
-                return param;
-            }
-        };
-        requestQueue.add(stringRequest);
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            }){
+                @Override
+                protected Map<String,String> getParams() throws AuthFailureError {
+                    HashMap<String,String> param = new HashMap<String, String>();
+                    param.put("idsanpham",String.valueOf(1)); // id của điện thoại là 1
+                    return param;
+                }
+            };
+            requestQueue.add(stringRequest);
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     private void ViewAdapterSanpham() {

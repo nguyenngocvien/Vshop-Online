@@ -85,54 +85,58 @@ public class LaptopFragment extends Fragment {
     }
 
     private void GetData(int Page) {
-        final RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());//tạo phương thức gửi lên cho server thông qua biến request
-        String duongdan = Server.duongDanDienthoai+String.valueOf(Page); //page để sử dụng cho load more
-        StringRequest stringRequest =  new StringRequest(Request.Method.POST, duongdan, new Response.Listener<String>() { //đọc dữ liệu về dưới dạng JSON
-            @Override
-            public void onResponse(String response) {
-                int id=0;
-                String Tenlaptop="";
-                int Gialaptop=0;
-                String Hinhanhlaptop="";
-                String Motalaptop="";
-                int Idsplaptop=0;
-                if (response != null && response.length() != 2){
-                    listviewlaptop.removeFooterView(footerview);//tắt thanh progress bar khi dữ liệu đổ về
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        for (int i=0; i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            id = jsonObject.getInt("id");
-                            Tenlaptop = jsonObject.getString("tensp");
-                            Gialaptop = jsonObject.getInt("giasp");
-                            Hinhanhlaptop = jsonObject.getString("hinhanhsp");
-                            Motalaptop = jsonObject.getString("motasp");
-                            Idsplaptop = jsonObject.getInt("idsanpham");
-                            manglaptop.add(new Sanpham(id,Tenlaptop,Gialaptop,Hinhanhlaptop,Motalaptop,Idsplaptop));
-                            laptopAdapter.notifyDataSetChanged(); //cập nhật lại khi đổ dữ liệu vào
+        try {
+            final RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());//tạo phương thức gửi lên cho server thông qua biến request
+            String duongdan = Server.duongDanDienthoai+String.valueOf(Page); //page để sử dụng cho load more
+            StringRequest stringRequest =  new StringRequest(Request.Method.POST, duongdan, new Response.Listener<String>() { //đọc dữ liệu về dưới dạng JSON
+                @Override
+                public void onResponse(String response) {
+                    int id=0;
+                    String Tenlaptop="";
+                    int Gialaptop=0;
+                    String Hinhanhlaptop="";
+                    String Motalaptop="";
+                    int Idsplaptop=0;
+                    if (response != null && response.length() != 2){
+                        listviewlaptop.removeFooterView(footerview);//tắt thanh progress bar khi dữ liệu đổ về
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i=0; i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                id = jsonObject.getInt("id");
+                                Tenlaptop = jsonObject.getString("tensp");
+                                Gialaptop = jsonObject.getInt("giasp");
+                                Hinhanhlaptop = jsonObject.getString("hinhanhsp");
+                                Motalaptop = jsonObject.getString("motasp");
+                                Idsplaptop = jsonObject.getInt("idsanpham");
+                                manglaptop.add(new Sanpham(id,Tenlaptop,Gialaptop,Hinhanhlaptop,Motalaptop,Idsplaptop));
+                                laptopAdapter.notifyDataSetChanged(); //cập nhật lại khi đổ dữ liệu vào
+                            }
+                        } catch (JSONException e){
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e){
-                        e.printStackTrace();
+                    }else{
+                        limitdata = true;
+                        listviewlaptop.removeFooterView(footerview);
+                        //CheckConnection.showToast_Short(getContext(),"Đã hết dữ liệu");
                     }
-                }else{
-                    limitdata = true;
-                    listviewlaptop.removeFooterView(footerview);
-                    //CheckConnection.showToast_Short(getContext(),"Đã hết dữ liệu");
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams() throws AuthFailureError { //giá trị trong function này để truyền cho phuong thức POST
-                HashMap<String,String> param = new HashMap<String, String>();
-                param.put("idsanpham",String.valueOf(2)); //key phải trùng với key trong php, id của laptop là 2
-                return param;
-            }
-        };
-        requestQueue.add(stringRequest);
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            }){
+                @Override
+                protected Map<String,String> getParams() throws AuthFailureError { //giá trị trong function này để truyền cho phuong thức POST
+                    HashMap<String,String> param = new HashMap<String, String>();
+                    param.put("idsanpham",String.valueOf(2)); //key phải trùng với key trong php, id của laptop là 2
+                    return param;
+                }
+            };
+            requestQueue.add(stringRequest);
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     private void LoadMoreData() {
