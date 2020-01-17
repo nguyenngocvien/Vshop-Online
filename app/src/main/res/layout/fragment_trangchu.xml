@@ -8,7 +8,7 @@
     <ViewFlipper
         android:id="@+id/viewlipper"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="180dp">
     </ViewFlipper>
 
     <LinearLayout
@@ -17,7 +17,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:textSize="20dp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#009688"
             android:layout_margin="5dp"

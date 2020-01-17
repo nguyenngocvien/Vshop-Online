@@ -17,8 +17,8 @@
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/newicon"
                 android:layout_gravity="top|left"
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 <TextView
                     android:layout_marginLeft="5dp"
                     android:textColor="#101010"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:text="Tên sản phẩm"
                     android:id="@+id/textviewtensanpham"
                     android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
                 <TextView
                     android:layout_marginLeft="5dp"
                     android:textColor="#f20"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:text="9999"
                     android:id="@+id/textviewgiasanpham"
                     android:layout_width="wrap_content"
